@@ -36,42 +36,61 @@
         let firstOperand = '';
         let secondOperand = '';
         let operator = '';
+        let answer;
 
         function addNumber(number) {
             if (operator === '') {
                 firstOperand += number;
-                result.value = firstOperand;
+                result.value += number;
             } else {
                 secondOperand += number;
-                result.value = secondOperand;
+                result.value += number;
             }
         }
 
         function addOperator(op) {
-            if (firstOperand === '') {
+
+            if (firstOperand === '' && (op ==! '-' || op ==! '+')) {
                 alert('Erreur: pas de nombre entré');
                 return;
             }
+            
             operator = op;
-            result.value = operator;
+
+            result.value += ' ' + operator + ' ';
         }
 
         function clearResult() {
             result.value = '';
+            answer = '';
             firstOperand = '';
             secondOperand = '';
             operator = '';
         }
 
         function calculate() {
-            let answer;
+            
+            
             switch (operator) {
             case '+':
-                answer = parseFloat(firstOperand) + parseFloat(secondOperand);
-                break;
-                case '-':
-                answer = parseFloat(firstOperand) - parseFloat(secondOperand);
-                break;
+                if(firstOperand == ''){
+
+                    answer = parseFloat(secondOperand);
+                    break;
+                }
+                else {answer = parseFloat(firstOperand) + parseFloat(secondOperand);
+                break;}
+                
+            case '-':
+                if(firstOperand == ''){
+
+                    answer = - parseFloat(secondOperand);
+                    break;
+                }
+                else{
+                    answer = parseFloat(firstOperand) - parseFloat(secondOperand);
+                    break;
+                }
             case '*':
                 answer = parseFloat(firstOperand) * parseFloat(secondOperand);
                 break;
